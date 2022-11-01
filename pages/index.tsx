@@ -3,22 +3,22 @@ import React from "react";
 import { useUserProfile } from "../service/github.api.hooks";
 
 const Index: NextPage = () => {
-  const {
-    isLoading,
-    error: error,
-    data: userProfile,
-  } = useUserProfile("test", "test");
+  const { isLoading, error, data } = useUserProfile(
+    "hbzhou",
+    "next-course-app"
+  );
 
   if (isLoading) return "Loading...";
 
   if (error) return "An error has occurred: " + error.message;
+
   return (
     <>
-      <h1>{userProfile.name}</h1>
-      <p>{userProfile.description}</p>
-      <strong>👀 {userProfile.subscribers_count}</strong>{" "}
-      <strong>✨ {userProfile.stargazers_count}</strong>{" "}
-      <strong>🍴 {userProfile.forks_count}</strong>
+      <h1 className=" text-3xl text-green-600 p-2 m-2">{data.name}</h1>
+      <p className=" text-2xl text-blue-50 p-2 m-2">{data.description}</p>
+      <strong>👀 {data.subscribers_count}</strong>{" "}
+      <strong>✨ {data.stargazers_count}</strong>{" "}
+      <strong>🍴 {data.forks_count}</strong>
     </>
   );
 };
