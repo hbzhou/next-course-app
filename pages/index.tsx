@@ -1,8 +1,7 @@
-import { NextPage } from "next";
 import React from "react";
 import { useUserProfile } from "../service/github.api.hooks";
 
-const Index: NextPage = () => {
+const Index = () => {
   const { isLoading, error, data } = useUserProfile(
     "hbzhou",
     "next-course-app"
@@ -11,6 +10,8 @@ const Index: NextPage = () => {
   if (isLoading) return "Loading...";
 
   if (error) return "An error has occurred: " + error.message;
+
+  if (data) return "An error has occusred: No data";
 
   return (
     <>
