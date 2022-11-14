@@ -1,11 +1,10 @@
 import ky from "ky";
-import {get, toString} from 'lodash'
-import { MutationCache, QueryCache, QueryClient, QueryKey } from "react-query";
+import { get, toString } from "lodash";
+import { MutationCache, QueryCache, QueryClient } from "react-query";
 
-const onError = (err:any) => {
-    const errorMsg = get(err, "response.data.message") || toString(get(err, "response.data")) || err.message
-}
-
+const onError = (err: any) => {
+  const errorMsg = get(err, "response.data.message") || toString(get(err, "response.data")) || err.message;
+};
 
 export default new QueryClient({
   defaultOptions: {
@@ -19,10 +18,9 @@ export default new QueryClient({
     },
   },
   queryCache: new QueryCache({
-    onError
+    onError,
   }),
   mutationCache: new MutationCache({
-    onError
-  })
+    onError,
+  }),
 });
-
