@@ -5,8 +5,5 @@ export const useUserProfile = (
   projectName: string,
   enabled: boolean = true
 ): UseQueryResult<UserProfile, ErrorMessage> => {
-  return useQuery<UserProfile, ErrorMessage, UserProfile>(
-    `https://api.github.com/repos/${username}/${projectName}`,
-    { enabled }
-  );
+  return useQuery<UserProfile, ErrorMessage, UserProfile>(`https://api.github.com/repos/${username}/${projectName}`, { enabled });
 };
