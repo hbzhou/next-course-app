@@ -5,3 +5,7 @@ declare type UserProfile = {
   stargazers_count: number;
   forks_count: number;
 };
+
+declare type ErrorMessage = {
+  message: String;
+};

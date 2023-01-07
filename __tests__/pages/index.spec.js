@@ -1,8 +1,6 @@
-import React from "react";
-import { render, screen, renderHook, waitFor } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
+import { QueryClient, QueryClientProvider } from "react-query";
 import Index from "../../pages/index";
-import * as apiHooks from "../../service/github.api.hooks";
-import { QueryClient, QueryClientProvider, useQuery } from "react-query";
 
 const mockData = {
   name: "spring-boot-all",
