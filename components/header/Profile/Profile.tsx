@@ -4,7 +4,7 @@ const Profile: React.FC = () => {
   return (
     <div className='flex m-4 gap-3'>
       <div className='font-bold font-mono text-xl'>Jeremy</div>
-      <button className='px-3 border-2 border-solid border-purple-700 rounded-md'>Logout</button>
+      <button className='btn btn-secondary'>Logout</button>
     </div>
   );
 };
