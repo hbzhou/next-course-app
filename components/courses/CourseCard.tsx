@@ -1,8 +1,14 @@
-import React from "react";
+import { useRouter } from "next/router";
+import React, { useCallback } from "react";
 import Button from "../common/Button";
 import LabelGroup from "../common/LabelGroup";
 
 const CourseCard: React.FC<Course> = ({ id, title, description, duration, creationDate, authors }) => {
+  const router = useRouter();
+  const showCourse = useCallback(() => {
+    router.push(`/courses/${id}`);
+  }, [router, id]);
+
   return (
     <div className='flex flex-col  m-4 border-solid border-2 border-green-500'>
       <div className='card'>
@@ -14,7 +20,9 @@ const CourseCard: React.FC<Course> = ({ id, title, description, duration, creati
             <LabelGroup label='Duration'>{duration} hours</LabelGroup>
             <LabelGroup label='Created'>{creationDate}</LabelGroup>
             <div className='card-actions justify-center'>
-              <Button className='btn-info'>Show course</Button>
+              <Button className='btn-info' onClick={showCourse}>
+                Show course
+              </Button>
             </div>
           </div>
         </div>
