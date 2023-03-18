@@ -1,6 +1,7 @@
-import { MutationCache, QueryCache } from "@tanstack/react-query";
+import { MutationCache, QueryCache, QueryClient } from "@tanstack/react-query";
 import { httpBatchLink } from "@trpc/client";
 import { createTRPCNext } from "@trpc/next";
+import { createTRPCReact } from "@trpc/react-query";
 import { get, toString } from "lodash";
 import type { AppRouter } from "../server/routers/_app";
 
@@ -22,30 +23,32 @@ const onError = (err: any) => {
   //TODO toast service
 };
 
+const links = [
+  httpBatchLink({
+    /**
+     * If you want to use SSR, you need to use the server's full URL
+     * @link https://trpc.io/docs/ssr
+     **/
+    url: `${getBaseUrl()}/api/trpc`,
+  }),
+];
+const queryClientConfig = {
+  defaultOptions: { queries: { refetchOnWindowFocus: false, retry: 2, staleTime: 60 * 1000 } },
+  queryCache: new QueryCache({
+    onError,
+  }),
+  mutationCache: new MutationCache({
+    onError,
+  }),
+};
 export const trpc = createTRPCNext<AppRouter>({
   config({ ctx }) {
     return {
-      links: [
-        httpBatchLink({
-          /**
-           * If you want to use SSR, you need to use the server's full URL
-           * @link https://trpc.io/docs/ssr
-           **/
-          url: `${getBaseUrl()}/api/trpc`,
-        }),
-      ],
+      links,
       /**
        * @link https://tanstack.com/query/v4/docs/reference/QueryClient
        **/
-      queryClientConfig: {
-        defaultOptions: { queries: { refetchOnWindowFocus: false, retry: 2, staleTime: 60 * 1000 } },
-        queryCache: new QueryCache({
-          onError,
-        }),
-        mutationCache: new MutationCache({
-          onError,
-        }),
-      },
+      queryClientConfig,
     };
   },
   /**
@@ -53,3 +56,9 @@ export const trpc = createTRPCNext<AppRouter>({
    **/
   ssr: false,
 });
+
+export const trpcReact = createTRPCReact<AppRouter>();
+
+export const queryClient = new QueryClient(queryClientConfig);
+
+export const trpcClient = trpcReact.createClient({ links });

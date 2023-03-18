@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
-import { QueryClient, QueryClientProvider } from "react-query";
 import Index from "../../pages/index";
+import { withReactTRPC } from "../../server/trpcReactWrapper";
 
 const mockData = {
   name: "spring-boot-all",
@@ -9,15 +9,10 @@ const mockData = {
   stargazers_count: 3,
   forks_count: 4,
 };
-const queryClient = new QueryClient();
 
 describe("Index Page", () => {
   beforeEach(async () => {
-    const wrapper = render(
-      <QueryClientProvider client={queryClient}>
-        <Index />
-      </QueryClientProvider>
-    );
+    const wrapper = render(<Index />, { wrapper: withReactTRPC });
   });
 
   it("rending a head", () => {
