@@ -1,30 +1,22 @@
 import React from "react";
+import Button from "../common/Button";
+import LabelGroup from "../common/LabelGroup";
 
 const CourseCard: React.FC<Course> = ({ id, title, description, duration, creationDate, authors }) => {
   return (
-    <div className='flex justify-between items-center m-4 border-solid border-2 border-green-500'>
-      <div className='card m-4 w-1/2'>
+    <div className='flex flex-col  m-4 border-solid border-2 border-green-500'>
+      <div className='card'>
         <div className='card-body'>
-          <h2 className=' card-title'>{title}</h2>
+          <h2 className='card-title'>{title}</h2>
           <p>{description}</p>
-        </div>
-      </div>
-      <div className='divider lg:divider-horizontal'></div>
-      <div className='flex flex-col justify-evenly flex-grow m-4 min-w-fit'>
-        <div className='m-2'>
-          <label>Authors:</label>
-          <span>{authors.join(",")}</span>
-        </div>
-        <div className='m-2'>
-          <label>Duration:</label>
-          <span>{duration} hours</span>
-        </div>
-        <div className='m-2'>
-          <label>Created:</label>
-          <span>{creationDate}</span>
-        </div>
-        <div className='m-2 text-center'>
-          <button className='btn btn-info'>Show course</button>
+          <div className='flex flex-col justify-evenly'>
+            <LabelGroup label='Authors'>{authors.join(",")}</LabelGroup>
+            <LabelGroup label='Duration'>{duration} hours</LabelGroup>
+            <LabelGroup label='Created'>{creationDate}</LabelGroup>
+            <div className='card-actions justify-center'>
+              <Button className='btn-info'>Show course</Button>
+            </div>
+          </div>
         </div>
       </div>
     </div>
