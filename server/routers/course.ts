@@ -1,10 +1,11 @@
 import { mockedCoursesList } from "../../constants/mockedCourses";
 import { createNextRouter, procedure } from "../server";
 import z from "zod";
+import prisma from "../../db/PrismaClient";
 
 export const courseRouter = createNextRouter({
   courses: procedure.query<Course[]>(async () => {
-    return mockedCoursesList;
+    return prisma.course.findMany();
   }),
   course: procedure
     .input(
@@ -13,6 +14,10 @@ export const courseRouter = createNextRouter({
       })
     )
     .query<Course | null>(async ({ input }) => {
-      return mockedCoursesList.find((course) => course.id === input.id) ?? null;
+      return prisma.course.findUniqueOrThrow({
+        where: {
+          id: input.id,
+        },
+      });
     }),
 });
