@@ -8,7 +8,7 @@ interface Props {
 
 const LabelGroup = ({ label, children, separator = ":" }: Props) => {
   return (
-    <div className='inline-flex my-2'>
+    <div className='inline-flex my-1'>
       <label className='font-bold'>{label}</label>
       <div className='ml-1 mr-2'>{separator}</div>
       <div>{children}</div>
