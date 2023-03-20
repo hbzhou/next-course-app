@@ -5,16 +5,28 @@ import Input from "../../components/common/Input";
 import Title from "../../components/common/Title";
 import Select from "react-select";
 import { trpc } from "../../server/trpc";
+import { format } from "date-fns";
 
 const CreateCourse = () => {
+  const ctx = trpc.useContext();
   const {
     register,
     handleSubmit,
     control,
     formState: { errors },
   } = useForm<Course>();
-
-  const onSubmit: SubmitHandler<Course> = (data) => {};
+  const mutation = trpc.course.createCourse.useMutation();
+  const onSubmit: SubmitHandler<Course> = (data) => {
+    const creationDate = format(new Date(), "yyyy-MM-dd");
+    mutation.mutateAsync(
+      { ...data, creationDate },
+      {
+        onSuccess: (_: Course) => {
+          ctx.course.courses.invalidate();
+        },
+      }
+    );
+  };
 
   const authorOptions = trpc.author.authors.useQuery().data?.map((author: Author) => {
     return { value: author.id, label: author.name };

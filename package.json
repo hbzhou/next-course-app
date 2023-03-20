@@ -16,6 +16,7 @@
     "@trpc/react-query": "^10.16.0",
     "@trpc/server": "^10.16.0",
     "daisyui": "^2.51.3",
+    "date-fns": "^2.29.3",
     "dotenv": "^16.0.3",
     "got": "^12.6.0",
     "lodash": "^4.17.21",

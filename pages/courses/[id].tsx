@@ -6,7 +6,7 @@ import LabelGroup from "../../components/common/LabelGroup";
 const CourseInfo: React.FC = () => {
   const router = useRouter();
   const id = router.query.id as string;
-  const { data: course, isLoading, isError, error } = trpc.course.course.useQuery({ id });
+  const { data: course, isLoading, isError, error } = trpc.course.getCourse.useQuery({ id }, { enabled: !!id });
 
   if (isLoading) {
     return <div>loading</div>;

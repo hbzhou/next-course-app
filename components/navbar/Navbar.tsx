@@ -6,7 +6,7 @@ const Navbar = () => {
   return (
     <div className='navbar mx-4'>
       <div className='navbar-start'>
-        <Image src={logo} alt='logo' width={64} />
+        <Image src={logo} alt='logo' width={64} priority />
       </div>
       <div className='navbar-end'>
         <Profile />
