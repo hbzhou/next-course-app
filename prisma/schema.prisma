@@ -11,12 +11,12 @@ datasource db {
 }
 
 model Author {
-  id   String @id @map("_id") @db.ObjectId
+  id   String @id @default(auto()) @map("_id") @db.ObjectId
   name String @unique
 }
 
 model Course {
-  id           String   @id @default(value: uuid()) @map("_id") @db.ObjectId
+  id           String   @id @default(auto()) @map("_id") @db.ObjectId
   title        String   @unique
   description  String
   creationDate String

@@ -41,6 +41,7 @@
     "autoprefixer": "^10.4.13",
     "classnames": "^2.3.2",
     "cn": "^0.1.1",
+    "cypress": "^12.8.1",
     "eslint": "8.26.0",
     "eslint-config-next": "13.0.0",
     "jest": "^29.2.2",

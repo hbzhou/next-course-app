@@ -6,6 +6,7 @@ import Title from "../../components/common/Title";
 import Select from "react-select";
 import { trpc } from "../../server/trpc";
 import { format } from "date-fns";
+import { useRouter } from "next/router";
 
 const CreateCourse = () => {
   const ctx = trpc.useContext();
@@ -15,6 +16,7 @@ const CreateCourse = () => {
     control,
     formState: { errors },
   } = useForm<Course>();
+  const router = useRouter();
   const mutation = trpc.course.createCourse.useMutation();
   const onSubmit: SubmitHandler<Course> = (data) => {
     const creationDate = format(new Date(), "yyyy-MM-dd");
@@ -23,6 +25,7 @@ const CreateCourse = () => {
       {
         onSuccess: (_: Course) => {
           ctx.course.courses.invalidate();
+          router.push("/courses");
         },
       }
     );

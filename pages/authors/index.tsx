@@ -5,14 +5,12 @@ import Button from "../../components/common/Button";
 import Modal from "../../components/common/Modal";
 import { trpc } from "../../server/trpc";
 
-interface QueryAllAuthorsResp {
-  successful: boolean;
-  result: Author[];
-}
-
 const Authors = () => {
   const [showModal, setShowModal] = useState<boolean>(false);
   const { data: authors } = trpc.author.authors.useQuery();
+  const handleOnSave = () => {
+    setShowModal(false);
+  };
 
   return (
     <div className=' border-solid border-2 border-pink-400 m-4 flex justify-center'>
@@ -31,7 +29,7 @@ const Authors = () => {
       </div>
       {showModal ? (
         // eslint-disable-next-line react/no-children-prop
-        <Modal title='Add Author' children={<AddAuthor />} handleClose={() => setShowModal(false)} handleSave={() => setShowModal(false)} />
+        <Modal title='Add Author' children={<AddAuthor />} handleClose={() => setShowModal(false)} handleSave={handleOnSave} />
       ) : null}
     </div>
   );
