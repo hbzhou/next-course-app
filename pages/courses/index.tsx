@@ -27,7 +27,7 @@ const Courses = () => {
   };
 
   return (
-    <div className='border-solid border-2 border-green-300  m-4'>
+    <div className='courses border-solid border-2 border-green-300 m-4'>
       <div className='flex justify-between m-4 '>
         <SearchBar handleSearch={handleSearch} />
         <Button className=' border-purple-500 w-56 max-h-10 min-w-fit' onClick={() => router.push("/courses/create")}>

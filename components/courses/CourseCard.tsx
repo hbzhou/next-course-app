@@ -10,7 +10,7 @@ const CourseCard: React.FC<Course> = ({ id, title, description, duration, creati
   }, [router, id]);
 
   return (
-    <div className='flex flex-col  m-4 border-solid border-2 border-green-500'>
+    <div className='course-card flex flex-col  m-4 border-solid border-2 border-green-500'>
       <div className='card'>
         <div className='card-body'>
           <h2 className='card-title'>{title}</h2>
