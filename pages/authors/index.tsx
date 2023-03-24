@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import { SubmitHandler, useForm } from "react-hook-form";
 import AddAuthor from "../../components/authors/AddAuthor";
 import AuthorItem from "../../components/authors/AuthorItem";
 import Button from "../../components/common/Button";
@@ -7,9 +8,19 @@ import { trpc } from "../../server/trpc";
 
 const Authors = () => {
   const [showModal, setShowModal] = useState<boolean>(false);
+  const { register, handleSubmit } = useForm<Author>();
+
+  const ctx = trpc.useContext();
   const { data: authors } = trpc.author.authors.useQuery();
-  const handleOnSave = () => {
-    setShowModal(false);
+  const mutation = trpc.author.createAuthor.useMutation();
+
+  const onSubmit: SubmitHandler<Author> = (data) => {
+    mutation.mutateAsync(data, {
+      onSuccess: () => {
+        setShowModal(false);
+        ctx.author.authors.invalidate();
+      },
+    });
   };
 
   return (
@@ -28,8 +39,11 @@ const Authors = () => {
         </div>
       </div>
       {showModal ? (
-        // eslint-disable-next-line react/no-children-prop
-        <Modal title='Add Author' children={<AddAuthor />} handleClose={() => setShowModal(false)} handleSave={handleOnSave} />
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <Modal title='Add Author' handleClose={() => setShowModal(false)}>
+            <AddAuthor register={register} />
+          </Modal>
+        </form>
       ) : null}
     </div>
   );
