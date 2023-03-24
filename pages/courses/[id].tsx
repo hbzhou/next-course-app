@@ -2,17 +2,16 @@ import React from "react";
 import { useRouter } from "next/router";
 import { trpc } from "../../server/trpc";
 import LabelGroup from "../../components/common/LabelGroup";
+import { useAuthors } from "../../service/course.hooks";
 
 const CourseInfo: React.FC = () => {
   const router = useRouter();
   const id = router.query.id as string;
-  const { data: course, isLoading, isError, error } = trpc.course.getCourse.useQuery({ id }, { enabled: !!id });
+  const { data: course, isLoading } = trpc.course.getCourse.useQuery({ id }, { enabled: !!id });
+  const authors = useAuthors(course?.authors);
 
-  if (isLoading) {
+  if (isLoading || !course) {
     return <div>loading</div>;
-  }
-  if (isError || !course) {
-    return <div>{error?.message}</div>;
   }
 
   return (
@@ -25,8 +24,8 @@ const CourseInfo: React.FC = () => {
           <LabelGroup label='Duration'>{course.duration} hours</LabelGroup>
           <LabelGroup label='Created'>{course.creationDate}</LabelGroup>
           <LabelGroup label='Authors'>
-            {course.authors.map((author) => {
-              return <div key={author}>author</div>;
+            {authors?.map((author) => {
+              return <div key={author}>{author}</div>;
             })}
           </LabelGroup>
         </div>
