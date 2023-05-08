@@ -1,18 +1,19 @@
-import React from "react";
+import React, { forwardRef } from "react";
 import cn from "classnames";
+import { Button as SmtButton, ButtonProps } from "semantic-ui-react";
 
-interface Props {
-  children: React.ReactNode;
-  className?: string;
-  onClick?: () => void;
-}
+export type Props = {
+  size?: "medium" | "small" | "large";
+} & ButtonProps;
 
-const Button: React.FC<Props> = ({ className, children, onClick }) => {
+const Button = forwardRef(({ size = "medium", children, className, ...rest }: Props, ref: any) => {
   return (
-    <button className={cn("btn", className)} onClick={onClick}>
+    <SmtButton size={size} className={cn(className)} {...rest}>
       {children}
-    </button>
+    </SmtButton>
   );
-};
+});
+
+Button.displayName = "button";
 
 export default Button;

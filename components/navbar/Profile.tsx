@@ -1,10 +1,13 @@
 import React from "react";
+import Button from "../common/Button";
 
 const Profile: React.FC = () => {
   return (
-    <div className='flex gap-6 items-center mr-6'>
-      <div className='font-bold font-mono text-xl'>Jeremy</div>
-      <button className='btn btn-secondary'>Logout</button>
+    <div className='flex gap-6 items-center'>
+      <div className='font-bold font-mono text-2xl'>Jeremy</div>
+      <div>
+        <Button className='primary'>Logout</Button>
+      </div>
     </div>
   );
 };
