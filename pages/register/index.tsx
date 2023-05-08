@@ -29,28 +29,31 @@ const Registration = () => {
         <Title>Registration</Title>
         <div className='my-2'>
           <Label>Name</Label>
-          <Input placeholder='Enter name' className=' border-amber-300' {...register("name", { required: true })} />
+          <Input placeholder='Enter name' {...register("name", { required: true })} />
           {errors.name && <div className=' text-red-500'>Required</div>}
         </div>
         <div className='my-2'>
           <Label>Email</Label>
-          <Input type='email' placeholder='Enter email' className=' border-amber-300' {...register("email", { required: true })} />
+          <Input type='email' placeholder='Enter email' {...register("email", { required: true })} />
           {errors.email && <div className=' text-red-500'>Required</div>}
         </div>
         <div className='my-2'>
           <Label>Password</Label>
-          <Input type='password' placeholder='Enter password' className=' border-amber-300' {...register("password", { required: true })} />
+          <Input type='password' placeholder='Enter password' {...register("password", { required: true })} />
           {errors.password && <div className=' text-red-500'>Required</div>}
         </div>
         <div className='my-2 text-center'>
-          <Button className='btn-primary'>Registration</Button>
+          <Button size='big' color='instagram'>
+            Registration
+          </Button>
         </div>
-        <div>
-          if you have an account you can {""}
+        <p className='font-sans text-xl'>
+          if you already have an account, you can {""}
           <Link href='/login' className=' text-blue-500'>
             Login
           </Link>
-        </div>
+          {""} here.
+        </p>
       </form>
     </div>
   );

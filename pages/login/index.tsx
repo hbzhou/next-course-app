@@ -27,31 +27,28 @@ const Login = () => {
         <div className='my-2'>
           <Label>Email</Label>
           <div>
-            <Input className='border-amber-300 rounded-md w-full' placeholder='Enter email' {...register("email", { required: true })} />
+            <Input placeholder='Enter email' {...register("email", { required: true })} />
             {errors.email && <span className=' text-red-500'>Required</span>}
           </div>
         </div>
         <div className='my-2'>
           <Label>Password</Label>
           <div>
-            <Input
-              className='border-amber-300 rounded-md w-full'
-              type='password'
-              placeholder='Enter password'
-              {...register("password", { required: true })}
-            />
+            <Input type='password' placeholder='Enter password' {...register("password", { required: true })} />
             {errors.password && <span className=' text-red-500'>Required</span>}
           </div>
           <div className='my-4 text-center'>
-            <Button className='btn-primary'> Login </Button>
+            <Button color='facebook' size='big'>
+              Login
+            </Button>
           </div>
-          <div>
+          <p className='font-sans text-xl'>
             If you don &apos;t have an account you can{" "}
             <Link className=' text-blue-500 my-2' href='/register'>
               register
             </Link>
-            {""} here
-          </div>
+            {""} here.
+          </p>
         </div>
       </form>
     </div>

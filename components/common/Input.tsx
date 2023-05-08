@@ -1,16 +1,9 @@
 import React, { ChangeEventHandler, forwardRef } from "react";
 import cn from "classnames";
+import { Input as SmtInput, InputProps } from "semantic-ui-react";
 
-interface Props {
-  type?: string;
-  placeholder?: string;
-  className?: string;
-  value?: string;
-  onChange?: ChangeEventHandler<HTMLInputElement>;
-}
-
-const Input = forwardRef<HTMLInputElement, Props>((props, ref) => {
-  return <input name='' ref={ref} {...props} className={cn(props.className, "border-solid border-2 p-2 h-12 rounded-md w-full")} />;
+const Input = forwardRef<SmtInput, InputProps>(({ className, ...rest }, ref) => {
+  return <SmtInput focus className={cn(className, "rounded-md w-full h-12")} {...rest} />;
 });
 
 Input.displayName = "Input";
