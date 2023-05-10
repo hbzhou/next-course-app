@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import { trpc } from "../../server/trpc";
 import LabelGroup from "../../components/common/LabelGroup";
 import { useAuthors } from "../../service/course.hooks";
+import { Container, Header, List } from "semantic-ui-react";
 
 const CourseInfo: React.FC = () => {
   const router = useRouter();
@@ -15,22 +16,32 @@ const CourseInfo: React.FC = () => {
   }
 
   return (
-    <div className='card'>
-      <div className='card-body'>
-        <div className='card-title'>{course.title}</div>
-        <div>{course.description}</div>
-        <div className='flex flex-col'>
+    <Container text className='my-4'>
+      <Header>{course.title}</Header>
+      <p>{course.description}</p>
+      <List>
+        <List.Item>
           <LabelGroup label='ID'>{course.id}</LabelGroup>
+        </List.Item>
+        <List.Item>
           <LabelGroup label='Duration'>{course.duration} hours</LabelGroup>
+        </List.Item>
+        <List.Item>
           <LabelGroup label='Created'>{course.creationDate}</LabelGroup>
+        </List.Item>
+        <List.Item>
           <LabelGroup label='Authors'>
             {authors?.map((author) => {
-              return <div key={author}>{author}</div>;
+              return (
+                <List key={author} className='!pt-0 px-2'>
+                  {author}
+                </List>
+              );
             })}
           </LabelGroup>
-        </div>
-      </div>
-    </div>
+        </List.Item>
+      </List>
+    </Container>
   );
 };
 

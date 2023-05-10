@@ -6,7 +6,7 @@ const Profile: React.FC = () => {
     <div className='flex gap-6 items-center'>
       <div className='font-bold font-mono text-2xl'>Jeremy</div>
       <div>
-        <Button className='primary'>Logout</Button>
+        <Button color='linkedin'>Logout</Button>
       </div>
     </div>
   );

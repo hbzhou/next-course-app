@@ -16,10 +16,10 @@ const Courses = () => {
   };
 
   return (
-    <div className='courses border-solid border-2 border-green-300 m-4'>
+    <div className='courses m-4'>
       <div className='flex justify-between m-4'>
         <SearchBar handleSearch={handleSearch} />
-        <Button color='violet' onClick={() => router.push("/courses/create")}>
+        <Button color='linkedin' onClick={() => router.push("/courses/create")}>
           Add new course
         </Button>
       </div>

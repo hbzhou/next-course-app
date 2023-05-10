@@ -9,6 +9,7 @@ import { format } from "date-fns";
 import { useRouter } from "next/router";
 import Dropdown from "../../components/common/Dropdown";
 import TextArea from "../../components/common/TextArea";
+import { Container } from "semantic-ui-react";
 
 const CreateCourse = () => {
   const ctx = trpc.useContext();
@@ -38,36 +39,34 @@ const CreateCourse = () => {
   });
 
   return (
-    <div className='border-solid border-2 border-indigo-500 m-4'>
+    <Container>
       <Title>Create Course</Title>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <div className='flex justify-between items-center m-4'>
-          <div>
-            <div>Title</div>
-            <Input {...register("title", { required: true })} />
-            <div>{errors.title && <span className='mx-1 text-red-500'>Required</span>}</div>
-          </div>
-          <div>
-            <Button color='violet'>Create Course</Button>
-          </div>
+        <div className='m-4'>
+          <div className='font-sans text-xl'>Title</div>
+          <Input {...register("title", { required: true })} />
+          <div>{errors.title && <span className='mx-1 text-red-500'>Required</span>}</div>
         </div>
         <div className='m-4'>
-          <div>Duration</div>
+          <div className='font-sans text-xl'>Duration</div>
           <Input type='number' {...register("duration", { required: true, valueAsNumber: true })} />
           <div>{errors.duration && <span className='mx-1 text-red-500'>Required</span>}</div>
         </div>
         <div className='m-4'>
-          <div>Authors</div>
+          <div className='font-sans text-xl'>Authors</div>
           <Dropdown placeholder='Authors' options={authorOptions} />
           <div>{errors.authors && <span className='mx-1 text-red-500'>Required</span>}</div>
         </div>
         <div className='m-4'>
-          <div>Description</div>
+          <div className='font-sans text-xl'>Description</div>
           <TextArea rows={4} className='block p-2.5 w-full' {...register("description", { required: true })} />
           <div>{errors.description && <span className='mx-1 text-red-500'>Required</span>}</div>
         </div>
+        <div className='m-4'>
+          <Button color='linkedin'>Create Course</Button>
+        </div>
       </form>
-    </div>
+    </Container>
   );
 };
 
