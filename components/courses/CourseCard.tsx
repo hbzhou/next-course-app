@@ -3,6 +3,7 @@ import React, { useCallback } from "react";
 import { useAuthors } from "../../service/course.hooks";
 import Button from "../common/Button";
 import LabelGroup from "../common/LabelGroup";
+import Card from "../common/Card";
 
 const CourseCard: React.FC<Course> = ({ id, title, description, duration, creationDate, authors }) => {
   const router = useRouter();
@@ -12,24 +13,18 @@ const CourseCard: React.FC<Course> = ({ id, title, description, duration, creati
   }, [router, id]);
 
   return (
-    <div className='course-card flex flex-col  m-4 border-solid border-2 border-green-500'>
-      <div className='card'>
-        <div className='card-body'>
-          <h2 className='card-title'>{title}</h2>
-          <p>{description}</p>
-          <div className='flex flex-col justify-evenly'>
-            <LabelGroup label='Authors'>{authorList?.join(",")}</LabelGroup>
-            <LabelGroup label='Duration'>{duration} hours</LabelGroup>
-            <LabelGroup label='Created'>{creationDate}</LabelGroup>
-            <div className='card-actions justify-center'>
-              <Button className='btn-info' onClick={showCourse}>
-                Show course
-              </Button>
-            </div>
-          </div>
+    <Card header={title} description={description} className='!mt-4 !w-1/6 h-full'>
+      <div className='flex flex-col justify-evenly'>
+        <LabelGroup label='Authors'>{authorList?.join(",")}</LabelGroup>
+        <LabelGroup label='Duration'>{duration} hours</LabelGroup>
+        <LabelGroup label='Created'>{creationDate}</LabelGroup>
+        <div className='card-actions justify-center'>
+          <Button className='btn-info' onClick={showCourse}>
+            Show course
+          </Button>
         </div>
       </div>
-    </div>
+    </Card>
   );
 };
 

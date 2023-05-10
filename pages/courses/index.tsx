@@ -17,15 +17,17 @@ const Courses = () => {
 
   return (
     <div className='courses border-solid border-2 border-green-300 m-4'>
-      <div className='flex justify-between m-4 '>
+      <div className='flex justify-between m-4'>
         <SearchBar handleSearch={handleSearch} />
         <Button color='violet' onClick={() => router.push("/courses/create")}>
           Add new course
         </Button>
       </div>
-      {courses?.map((course) => {
-        return <CourseCard key={course.id} {...course} />;
-      })}
+      <div className='flex gap-10 mx-4'>
+        {courses?.map((course) => {
+          return <CourseCard key={course.id} {...course} />;
+        })}
+      </div>
     </div>
   );
 };

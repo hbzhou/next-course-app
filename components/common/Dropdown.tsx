@@ -5,7 +5,7 @@ import cn from "classnames";
 const Dropdown: React.FC<DropdownProps> = ({ placeholder, options, className, ...rest }) => {
   return (
     <SmtDropDown
-      className={cn(className, "h-12 border-blue-400 border-solid border")}
+      className={cn(className, "h-12  !border-blue-400 border-solid border")}
       placeholder={placeholder}
       options={options}
       {...rest}
