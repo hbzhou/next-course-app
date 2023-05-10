@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import { trpc } from "../../server/trpc";
 import LabelGroup from "../../components/common/LabelGroup";
 import { useAuthors } from "../../service/course.hooks";
-import { Container, Header, List } from "semantic-ui-react";
+import { Container, Header, List, Loader } from "semantic-ui-react";
 
 const CourseInfo: React.FC = () => {
   const router = useRouter();
@@ -12,7 +12,7 @@ const CourseInfo: React.FC = () => {
   const authors = useAuthors(course?.authors);
 
   if (isLoading || !course) {
-    return <div>loading</div>;
+    return <Loader active inline='centered' />;
   }
 
   return (
