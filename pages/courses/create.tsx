@@ -39,7 +39,7 @@ const CreateCourse = () => {
   });
 
   return (
-    <Container>
+    <Container className='!w-2/5 p-4'>
       <Title>Create Course</Title>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className='m-4'>
