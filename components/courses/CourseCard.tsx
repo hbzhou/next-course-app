@@ -18,10 +18,8 @@ const CourseCard: React.FC<Course> = ({ id, title, description, duration, creati
         <LabelGroup label='Authors'>{authorList?.join(",")}</LabelGroup>
         <LabelGroup label='Duration'>{duration} hours</LabelGroup>
         <LabelGroup label='Created'>{creationDate}</LabelGroup>
-        <div className='card-actions justify-center'>
-          <Button className='btn-info' onClick={showCourse}>
-            Show course
-          </Button>
+        <div className='my-2'>
+          <Button onClick={showCourse}>Show course</Button>
         </div>
       </div>
     </Card>
