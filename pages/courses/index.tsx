@@ -23,7 +23,7 @@ const Courses = () => {
           Add new course
         </Button>
       </div>
-      <div className='flex gap-10 mx-4'>
+      <div className='flex gap-10 mx-4 flex-wrap'>
         {courses?.map((course) => {
           return <CourseCard key={course.id} {...course} />;
         })}
