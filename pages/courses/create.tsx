@@ -43,22 +43,22 @@ const CreateCourse = () => {
       <Title>Create Course</Title>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className='m-4'>
-          <div className='font-sans text-xl'>Title</div>
+          <div className='font-sans text-lg'>Title</div>
           <Input {...register("title", { required: true })} />
           <div>{errors.title && <span className='mx-1 text-red-500'>Required</span>}</div>
         </div>
         <div className='m-4'>
-          <div className='font-sans text-xl'>Duration</div>
+          <div className='font-sans text-lg'>Duration</div>
           <Input type='number' {...register("duration", { required: true, valueAsNumber: true })} />
           <div>{errors.duration && <span className='mx-1 text-red-500'>Required</span>}</div>
         </div>
         <div className='m-4'>
-          <div className='font-sans text-xl'>Authors</div>
+          <div className='font-sans text-lg'>Authors</div>
           <Dropdown placeholder='Authors' options={authorOptions} />
           <div>{errors.authors && <span className='mx-1 text-red-500'>Required</span>}</div>
         </div>
         <div className='m-4'>
-          <div className='font-sans text-xl'>Description</div>
+          <div className='font-sans text-lg'>Description</div>
           <TextArea rows={4} className='block p-2.5 w-full' {...register("description", { required: true })} />
           <div>{errors.description && <span className='mx-1 text-red-500'>Required</span>}</div>
         </div>

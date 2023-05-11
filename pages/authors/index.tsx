@@ -1,8 +1,7 @@
 import { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
-import AddAuthor from "../../components/authors/AddAuthor";
-import AuthorItem from "../../components/authors/AuthorItem";
-import Modal from "../../components/common/Modal";
+import { Table } from "semantic-ui-react";
+import Button from "../../components/common/Button";
 import { trpc } from "../../server/trpc";
 
 const Authors = () => {
@@ -22,25 +21,41 @@ const Authors = () => {
   };
 
   return (
-    <div className=' border-solid border-2 border-pink-400 m-4 flex justify-center'>
+    <div className='m-4 flex justify-center'>
       <div className='m-4 w-1/2'>
         <div>
-          <div className='flex justify-center my-8'>
-            <div className='block font-bold text-2xl ml-32'>Authors</div>
-            <label htmlFor='my-modal' className='btn bg-blue-700 ml-10 h-4' onClick={() => setTitle("New Author")}>
-              New
-            </label>
+          <div className='font-bold text-2xl text-center'>Authors</div>
+          <div className='flex justify-end my-4'>
+            <Button color='linkedin'>Add new Author</Button>
           </div>
-          {authors?.map((author) => (
-            <AuthorItem key={author.id} author={author} setModalTitle={setTitle} />
-          ))}
+          <div>
+            <Table celled>
+              <Table.Header>
+                <Table.Row>
+                  <Table.HeaderCell className='!text-center'>Author Name</Table.HeaderCell>
+                  <Table.HeaderCell className='!text-center'>Actions</Table.HeaderCell>
+                </Table.Row>
+              </Table.Header>
+              <Table.Body>
+                {authors?.map((author) => (
+                  <Table.Row key={author.id}>
+                    <Table.Cell className='!text-center'>{author.name}</Table.Cell>
+                    <Table.Cell className='!text-center'>
+                      <Button color='linkedin'>Edit</Button>
+                      <Button color='red'>Delete</Button>
+                    </Table.Cell>
+                  </Table.Row>
+                ))}
+              </Table.Body>
+            </Table>
+          </div>
         </div>
       </div>
-      <form onSubmit={handleSubmit(onSubmit)}>
+      {/* <form onSubmit={handleSubmit(onSubmit)}>
         <Modal title={title}>
           <AddAuthor register={register} />
         </Modal>
-      </form>
+      </form> */}
     </div>
   );
 };

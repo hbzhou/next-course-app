@@ -8,7 +8,7 @@ export type Props = {
 
 const Button = forwardRef(({ size = "medium", children, className, ...rest }: Props, ref: any) => {
   return (
-    <SmtButton size={size} className={cn(className)} {...rest}>
+    <SmtButton size={size} className={cn(className, "!mx-2")} {...rest}>
       {children}
     </SmtButton>
   );
