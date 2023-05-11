@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import { Form, Input, Modal } from "semantic-ui-react";
+import { Form, Modal } from "semantic-ui-react";
 import Button from "../common/Button";
-import _ from "lodash";
+import { trpc } from "../../server/trpc";
 
 type Props = {
   header: string;
@@ -18,10 +18,19 @@ const EditAuthorModal = ({ header, trigger }: Props) => {
     formState: { errors },
   } = useForm<Author>();
 
+  const useMutation = trpc.author.createAuthor.useMutation();
+  const ctx = trpc.useContext();
+
   const onSubmit = (data: Author) => {
-    console.log("Submit event");
-    alert(JSON.stringify(data));
-    setOpen(false);
+    useMutation.mutateAsync(
+      { name: data.name },
+      {
+        onSuccess: () => {
+          ctx.author.invalidate();
+          setOpen(false);
+        },
+      }
+    );
   };
 
   const onOpen = () => {
