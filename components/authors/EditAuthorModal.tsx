@@ -41,7 +41,7 @@ const EditAuthorModal = ({ header, trigger }: Props) => {
   };
 
   return (
-    <Modal onClose={() => setOpen(false)} onOpen={onOpen} open={open} size='small' trigger={trigger}>
+    <Modal onClose={() => setOpen(false)} onOpen={onOpen} open={open} size='small' trigger={trigger} closeIcon={true}>
       <Modal.Header>{header}</Modal.Header>
       <Modal.Content>
         <Form onSubmit={handleSubmit(onSubmit)}>
