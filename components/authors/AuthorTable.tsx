@@ -2,6 +2,7 @@ import React from "react";
 import { Table } from "semantic-ui-react";
 import Button from "../common/Button";
 import Modal from "../common/Modal";
+import DeleteAuthorModal from "./DeleteAuthorModal";
 import EditAuthorModal from "./EditAuthorModal";
 
 type Props = {
@@ -22,8 +23,8 @@ const AuthorTable: React.FC<Props> = ({ authors }) => {
           <Table.Row key={author.id}>
             <Table.Cell className='!text-center'>{author.name}</Table.Cell>
             <Table.Cell className='!text-center'>
-              <EditAuthorModal header='Edit Author' trigger={<Button color='linkedin'>Edit</Button>} />
-              <Button color='red'>Delete</Button>
+              <EditAuthorModal header='Edit Author' author={author} trigger={<Button color='linkedin'>Edit</Button>} />
+              <DeleteAuthorModal trigger={<Button color='red'>Delete</Button>} dataId={author.id} />
             </Table.Cell>
           </Table.Row>
         ))}

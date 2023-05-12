@@ -12,7 +12,9 @@ const Card: React.FC<Props> = ({ header, description, className, children }) => 
   return (
     <SmtCard className={className}>
       <SmtCard.Content header={header} />
-      <SmtCard.Content description={description} className='h-80 max-h-80 flex-wrap' />
+      <SmtCard.Content>
+        <SmtCard.Description className='h-80 max-h-80 flex-wrap overflow-ellipsis overflow-hidden'>{description}</SmtCard.Description>
+      </SmtCard.Content>
       <SmtCard.Content extra>{children}</SmtCard.Content>
     </SmtCard>
   );

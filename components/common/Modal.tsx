@@ -4,10 +4,15 @@ import Button from "./Button";
 
 type Props = {
   header: string;
+  onConfirm: () => void;
 } & ModalProps;
 
-const Modal = ({ header, handleSubmit, children, trigger, ...rest }: Props) => {
+const Modal = ({ header, children, onConfirm, trigger, ...rest }: Props) => {
   const [open, setOpen] = useState(false);
+  const handleOnConfirm = () => {
+    onConfirm();
+    setOpen(true);
+  };
 
   return (
     <SmtModal onClose={() => setOpen(false)} onOpen={() => setOpen(true)} open={open} trigger={trigger} {...rest}>
@@ -15,7 +20,7 @@ const Modal = ({ header, handleSubmit, children, trigger, ...rest }: Props) => {
       <SmtModal.Content>{children}</SmtModal.Content>
       <SmtModal.Actions>
         <Button content='Cancel' color='black' onClick={() => setOpen(false)} />
-        <Button content="Yep, that's me" labelPosition='right' icon='checkmark' onClick={() => setOpen(true)} positive />
+        <Button content='Confirm' labelPosition='right' icon='checkmark' onClick={handleOnConfirm} positive />
       </SmtModal.Actions>
     </SmtModal>
   );

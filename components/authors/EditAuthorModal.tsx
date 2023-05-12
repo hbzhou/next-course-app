@@ -7,37 +7,61 @@ import { trpc } from "../../server/trpc";
 type Props = {
   header: string;
   trigger: React.ReactNode;
+  author?: Author;
 };
 
-const EditAuthorModal = ({ header, trigger }: Props) => {
+const EditAuthorModal = ({ header, trigger, author }: Props) => {
   const [open, setOpen] = useState<boolean>(false);
   const {
     register,
     reset,
     handleSubmit,
+    setValue,
     formState: { errors },
   } = useForm<Author>();
 
-  const useMutation = trpc.author.createAuthor.useMutation();
+  const createMutation = trpc.author.createAuthor.useMutation();
+  const updateMutation = trpc.author.updateAuthor.useMutation();
   const ctx = trpc.useContext();
 
   const onSubmit = (data: Author) => {
-    useMutation.mutateAsync(
-      { name: data.name },
-      {
-        onSuccess: () => {
-          ctx.author.invalidate();
-          setOpen(false);
+    if (!author) {
+      createMutation.mutateAsync(
+        {
+          name: data.name,
         },
-      }
-    );
+        {
+          onSuccess: () => {
+            ctx.author.invalidate();
+            setOpen(false);
+          },
+        }
+      );
+    } else {
+      updateMutation.mutateAsync(
+        {
+          id: author.id,
+          name: data.name,
+        },
+        {
+          onSuccess: () => {
+            ctx.author.invalidate();
+            setOpen(false);
+          },
+        }
+      );
+    }
   };
 
   const onOpen = () => {
     setOpen(true);
-    reset({
-      name: "",
-    });
+    if (!author) {
+      reset({
+        name: "",
+      });
+    } else {
+      setValue("name", author.name);
+    }
   };
 
   return (
