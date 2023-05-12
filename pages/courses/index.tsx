@@ -1,6 +1,7 @@
 import _ from "lodash";
 import { useRouter } from "next/router";
 import { useMemo, useState } from "react";
+import { Container } from "semantic-ui-react";
 import Button from "../../components/common/Button";
 import CourseCard from "../../components/courses/CourseCard";
 import SearchBar from "../../components/courses/SearchBar";
@@ -16,7 +17,7 @@ const Courses = () => {
   };
 
   return (
-    <div className='courses m-4'>
+    <Container fluid className='courses m-auto'>
       <div className='flex justify-between m-4'>
         <SearchBar handleSearch={handleSearch} />
         <Button color='linkedin' onClick={() => router.push("/courses/create")}>
@@ -28,7 +29,7 @@ const Courses = () => {
           return <CourseCard key={course.id} {...course} />;
         })}
       </div>
-    </div>
+    </Container>
   );
 };
 

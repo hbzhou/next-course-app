@@ -13,7 +13,7 @@ const CourseCard: React.FC<Course> = ({ id, title, description, duration, creati
   }, [router, id]);
 
   return (
-    <Card header={title} description={description} className='!mt-4 !w-1/6 h-full min-w-72'>
+    <Card header={title} description={description} className='!mt-4 !w-1/5 h-full'>
       <div className='flex flex-col justify-evenly'>
         <LabelGroup label='Authors'>{authorList?.join(",")}</LabelGroup>
         <LabelGroup label='Duration'>{duration} hours</LabelGroup>
