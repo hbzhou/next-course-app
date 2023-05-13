@@ -1,7 +1,7 @@
 import { format } from "date-fns";
 import { useRouter } from "next/router";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { Container, Form } from "semantic-ui-react";
+import { Container, Form, Label } from "semantic-ui-react";
 import Button from "../../components/common/Button";
 import Dropdown from "../../components/common/Dropdown";
 import Input from "../../components/common/Input";
@@ -47,12 +47,24 @@ const CreateCourse = () => {
         <Form.Field>
           <label>Title</label>
           <input placeholder='Enter title' {...register("title", { required: true })} />
-          <div>{errors.title && <span className='mx-1 text-red-500'>Required</span>}</div>
+          <div>
+            {errors.title && (
+              <Label basic color='red' pointing='above'>
+                Required
+              </Label>
+            )}
+          </div>
         </Form.Field>
         <Form.Field>
           <label>Duration</label>
           <input type='number' placeholder='Enter duration' {...register("duration", { required: true, valueAsNumber: true })} />
-          <div>{errors.duration && <span className='mx-1 text-red-500'>Required</span>}</div>
+          <div>
+            {errors.duration && (
+              <Label basic color='red' pointing='above'>
+                Required
+              </Label>
+            )}
+          </div>
         </Form.Field>
         <Form.Field>
           <label>Authors</label>
@@ -68,12 +80,24 @@ const CreateCourse = () => {
               await trigger("authors");
             }}
           />
-          {errors.authors && <span className='mx-1 text-red-500'>Required</span>}
+          <div>
+            {errors.authors && (
+              <Label basic color='red' pointing='above'>
+                Required
+              </Label>
+            )}
+          </div>
         </Form.Field>
         <Form.Field>
           <label>Description</label>
           <textarea rows={4} className='w-full' {...register("description", { required: true })} />
-          <div>{errors.description && <span className='mx-1 text-red-500'>Required</span>}</div>
+          <div>
+            {errors.description && (
+              <Label basic color='red' pointing='above'>
+                Required
+              </Label>
+            )}
+          </div>
         </Form.Field>
         <div>
           <Button color='linkedin'>Create Course</Button>

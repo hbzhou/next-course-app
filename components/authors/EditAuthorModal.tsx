@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import { Form, Modal } from "semantic-ui-react";
+import { Form, Label, Modal } from "semantic-ui-react";
 import Button from "../common/Button";
 import { trpc } from "../../server/trpc";
 
@@ -72,7 +72,11 @@ const EditAuthorModal = ({ header, trigger, author }: Props) => {
           <Form.Field>
             <label>Author Name</label>
             <input placeholder='Enter author name' {...register("name", { required: true })} />
-            {errors.name && <span className='mx-1 text-red-500'>Required</span>}
+            {errors.name && (
+              <Label basic color='red' pointing='above'>
+                Required
+              </Label>
+            )}
           </Form.Field>
           <Form.Field className='flex justify-end'>
             <Button color='black' onClick={() => setOpen(false)}>
