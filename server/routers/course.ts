@@ -1,7 +1,6 @@
-import { mockedCoursesList } from "../../constants/mockedCourses";
-import { createNextRouter, procedure } from "../server";
 import z from "zod";
 import prisma from "../../db/PrismaClient";
+import { createNextRouter, procedure } from "../server";
 
 export const courseRouter = createNextRouter({
   courses: procedure.query<Course[]>(async () => {

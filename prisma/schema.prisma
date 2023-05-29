@@ -23,3 +23,11 @@ model Course {
   duration     Int
   authors      String[]
 }
+
+model User {
+  id       String @id @default(auto()) @map("_id") @db.ObjectId
+  name     String @unique
+  email    String
+  password String
+  role     String
+}

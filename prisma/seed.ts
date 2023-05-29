@@ -1,7 +1,7 @@
 import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 async function main() {
-  const authors = await prisma.author.createMany({
+  await prisma.author.createMany({
     data: [
       {
         id: "642032431f6f1427cb0a7e27",
@@ -25,7 +25,7 @@ async function main() {
       },
     ],
   });
-  const courses = await prisma.course.createMany({
+  await prisma.course.createMany({
     data: [
       {
         id: "64203360aeb001bfd24a582d",
@@ -87,6 +87,28 @@ async function main() {
       },
     ],
   });
+  await prisma.user.createMany({
+    data: [
+      {
+        "name": "Admin",
+        "email": "admin@email.com",
+        "password": "admin123",
+        "role": "admin",
+      },
+      {
+        "name": "Test User",
+        "email": "user@email.com",
+        "password": "user123",
+        "role": "user",
+      },
+      {
+        "name": "Jeremy Zhou",
+        "email": "admin@localhost.com",
+        "password": "12312312",
+        "role": "user",
+      },
+    ]
+  })
 }
 main()
   .then(async () => {
