@@ -3,9 +3,6 @@ import { useRouter } from "next/router";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { Container, Form, Label } from "semantic-ui-react";
 import Button from "../../components/common/Button";
-import Dropdown from "../../components/common/Dropdown";
-import Input from "../../components/common/Input";
-import TextArea from "../../components/common/TextArea";
 import Title from "../../components/common/Title";
 import { trpc } from "../../server/trpc";
 

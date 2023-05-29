@@ -3,8 +3,9 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import Button from "../../components/common/Button";
 import Input from "../../components/common/Input";
-import Label from "../../components/common/Label";
 import Title from "../../components/common/Title";
+import { Form } from "semantic-ui-react";
+import Label from "../../components/common/Label";
 
 interface LoginRequest {
   email: string;
@@ -18,25 +19,23 @@ const Login = () => {
     formState: { errors },
   } = useForm<LoginRequest>();
 
-  const onSubmit = (request: LoginRequest) => {};
+  const onSubmit = (request: LoginRequest) => {
+    console.log(request);
+  };
 
   return (
     <div className='flex'>
-      <form onSubmit={handleSubmit(onSubmit)} className='m-auto w-1/4'>
+      <Form onSubmit={handleSubmit(onSubmit)} className='m-auto w-1/4'>
         <Title>Login</Title>
-        <div className='my-2'>
-          <Label>Email</Label>
-          <div>
-            <Input placeholder='Enter email' {...register("email", { required: true })} />
-            {errors.email && <span className=' text-red-500'>Required</span>}
-          </div>
-        </div>
-        <div className='my-2'>
-          <Label>Password</Label>
-          <div>
-            <Input type='password' placeholder='Enter password' {...register("password", { required: true })} />
-            {errors.password && <span className=' text-red-500'>Required</span>}
-          </div>
+        <Form.Field>
+          <label>Email</label>
+          <input placeholder='Enter email' {...register("email", { required: true })} />
+          {errors.email && <Label>Required</Label>}
+        </Form.Field>
+        <Form.Field>
+          <label>Password</label>
+          <input type='password' placeholder='Enter password' {...register("password", { required: true })} />
+          {errors.password && <Label>Required</Label>}
           <div className='my-4 text-center'>
             <Button color='facebook' size='big'>
               Login
@@ -49,8 +48,8 @@ const Login = () => {
             </Link>
             {""} here.
           </p>
-        </div>
-      </form>
+        </Form.Field>
+      </Form>
     </div>
   );
 };

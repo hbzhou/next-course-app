@@ -5,6 +5,7 @@ import Button from "../../components/common/Button";
 import Input from "../../components/common/Input";
 import Label from "../../components/common/Label";
 import Title from "../../components/common/Title";
+import { Form } from "semantic-ui-react";
 
 interface User {
   name: string;
@@ -25,23 +26,23 @@ const Registration = () => {
 
   return (
     <div className='flex'>
-      <form onSubmit={handleSubmit(onSubmit)} className='m-auto w-1/4'>
+      <Form onSubmit={handleSubmit(onSubmit)} className='m-auto w-1/4'>
         <Title>Registration</Title>
-        <div className='my-2'>
-          <Label>Name</Label>
-          <Input placeholder='Enter name' {...register("name", { required: true })} />
-          {errors.name && <div className=' text-red-500'>Required</div>}
-        </div>
-        <div className='my-2'>
-          <Label>Email</Label>
-          <Input type='email' placeholder='Enter email' {...register("email", { required: true })} />
-          {errors.email && <div className=' text-red-500'>Required</div>}
-        </div>
-        <div className='my-2'>
-          <Label>Password</Label>
-          <Input type='password' placeholder='Enter password' {...register("password", { required: true })} />
-          {errors.password && <div className=' text-red-500'>Required</div>}
-        </div>
+        <Form.Field>
+          <label>Name</label>
+          <input placeholder='Enter name' {...register("name", { required: true })} />
+          {errors.name && <Label>Required</Label>}
+        </Form.Field>
+        <Form.Field>
+          <label>Email</label>
+          <input type='email' placeholder='Enter email' {...register("email", { required: true })} />
+          {errors.email && <Label>Required</Label>}
+        </Form.Field>
+        <Form.Field>
+          <label>Password</label>
+          <input type='password' placeholder='Enter password' {...register("password", { required: true })} />
+          {errors.password && <Label>Required</Label>}
+        </Form.Field>
         <div className='my-2 text-center'>
           <Button size='big' color='instagram'>
             Registration
@@ -54,7 +55,7 @@ const Registration = () => {
           </Link>
           {""} here.
         </p>
-      </form>
+      </Form>
     </div>
   );
 };

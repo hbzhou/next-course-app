@@ -1,5 +1,6 @@
 import React from "react";
 import cn from "classnames";
+import { Label as SmtLabel } from "semantic-ui-react";
 
 interface Props {
   children: React.ReactNode;
@@ -7,7 +8,11 @@ interface Props {
 }
 
 const Label: React.FC<Props> = ({ children, className }) => {
-  return <div className={cn("text-xl", className)}>{children}</div>;
+  return (
+    <SmtLabel className={cn("text-xl", className)} basic color='red' pointing='above'>
+      {children}
+    </SmtLabel>
+  );
 };
 
 export default Label;
