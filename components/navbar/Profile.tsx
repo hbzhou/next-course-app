@@ -1,6 +1,6 @@
 import React from "react";
 import Button from "../common/Button";
-import { signOut, useSession } from "next-auth/react";
+import { signIn, signOut, useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 
 const Profile: React.FC = () => {
@@ -20,9 +20,19 @@ const Profile: React.FC = () => {
           </Button>
         </div>
       ) : (
-        <Button color='linkedin' onClick={login}>
-          Login
-        </Button>
+        <>
+          <Button color='linkedin' onClick={login}>
+            Login
+          </Button>
+          <Button
+            color='google plus'
+            onClick={() => {
+              signIn();
+            }}
+          >
+            Login with Github
+          </Button>
+        </>
       )}
     </div>
   );

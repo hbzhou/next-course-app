@@ -18,9 +18,7 @@ export const authOptions = {
             // You can specify whatever fields you are expecting to be submitted.
             // e.g. domain, username, password, 2FA token, etc.
             // You can pass any HTML attribute to the <input> tag through the object.
-            credentials: {
-
-            },
+            credentials: {},
             async authorize(credentials, req) {
                 const { email, password } = credentials as { email: string, password: string }
                 const user = await prisma.user.findFirst({ where: { email } })
@@ -30,7 +28,7 @@ export const authOptions = {
                 throw new Error("incorrect credentials")
             }
         })
-    ],
+    ]
 }
 
 export default NextAuth(authOptions)

@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { useForm } from "react-hook-form";
-import { Form } from "semantic-ui-react";
+import { Form, Icon } from "semantic-ui-react";
 import Button from "../../components/common/Button";
 import Label from "../../components/common/Label";
 import Title from "../../components/common/Title";
@@ -50,7 +50,11 @@ const Login = () => {
             <Link className=' text-blue-500 my-2' href='/register'>
               register
             </Link>
-            {""} here.
+            {""} here or sign in with{" "}
+            <Button basic icon onClick={() => signIn()}>
+              <Icon name='github' className='mx-2' />
+              Github
+            </Button>
           </p>
         </Form.Field>
       </Form>
