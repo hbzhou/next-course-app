@@ -1,9 +1,15 @@
 import React from "react";
 import Button from "../common/Button";
-import { signIn, signOut, useSession } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
+import { useRouter } from "next/router";
 
 const Profile: React.FC = () => {
+  const router = useRouter();
   const { data: session } = useSession();
+  const login = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    router.push("/login");
+  };
   return (
     <div>
       {session && session.user ? (
@@ -14,7 +20,7 @@ const Profile: React.FC = () => {
           </Button>
         </div>
       ) : (
-        <Button color='linkedin' onClick={() => signIn()}>
+        <Button color='linkedin' onClick={login}>
           Login
         </Button>
       )}
