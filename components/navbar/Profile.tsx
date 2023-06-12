@@ -1,7 +1,7 @@
+import { signOut, useSession } from "next-auth/react";
+import { useRouter } from "next/router";
 import React from "react";
 import Button from "../common/Button";
-import { signIn, signOut, useSession } from "next-auth/react";
-import { useRouter } from "next/router";
 
 const Profile: React.FC = () => {
   const router = useRouter();
@@ -10,29 +10,29 @@ const Profile: React.FC = () => {
     e.preventDefault();
     router.push("/login");
   };
+  const logout = async (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    signOut({
+      callbackUrl: "/login",
+      redirect: true,
+    });
+  };
+  if (router.asPath === "/login") {
+    return <></>;
+  }
   return (
     <div>
       {session && session.user ? (
         <div className='flex gap-6 items-center'>
           <div className='font-bold font-mono text-2xl'>{session.user.name}</div>
-          <Button color='linkedin' onClick={() => signOut()}>
+          <Button color='linkedin' onClick={logout}>
             Logout
           </Button>
         </div>
       ) : (
-        <>
-          <Button color='linkedin' onClick={login}>
-            Login
-          </Button>
-          <Button
-            color='google plus'
-            onClick={() => {
-              signIn();
-            }}
-          >
-            Login with Github
-          </Button>
-        </>
+        <Button color='linkedin' onClick={login}>
+          Login
+        </Button>
       )}
     </div>
   );
