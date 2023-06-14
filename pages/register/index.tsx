@@ -6,6 +6,9 @@ import Input from "../../components/common/Input";
 import Label from "../../components/common/Label";
 import Title from "../../components/common/Title";
 import { Form } from "semantic-ui-react";
+import prisma from "../../db/PrismaClient";
+import { trpc } from "../../server/trpc";
+import { useRouter } from "next/router";
 
 interface User {
   name: string;
@@ -20,8 +23,18 @@ const Registration = () => {
     formState: { errors },
   } = useForm<User>();
 
+  const mutation = trpc.user.createUser.useMutation();
+  const router = useRouter();
+
   const onSubmit = (user: User) => {
-    console.log(user);
+    mutation.mutate(
+      { ...user },
+      {
+        onSuccess: () => {
+          router.push("/login");
+        },
+      }
+    );
   };
 
   return (
