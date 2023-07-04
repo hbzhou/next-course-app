@@ -1,12 +1,11 @@
 import React from "react";
-import { trpc } from "../../server/trpc";
 
-const Index = () => {
-  const { isLoading, error, data } = trpc.github.userProfile.useQuery({ userName: "hbzhou", projectName: "next-course-app" });
+const Github = async ({ params }: { params: { user: string; project: string } }) => {
+  const { user: userName, project: projectName } = params;
+  const res = await fetch(`https://api.github.com/repos/${userName}/${projectName}`);
+  const data = await res.json();
 
-  if (isLoading || !data) return "Loading...";
-
-  if (error) return "An error has occurred: " + error.message;
+  if (!data) return "Loading...";
 
   return (
     <>
@@ -17,4 +16,4 @@ const Index = () => {
   );
 };
 
-export default Index;
+export default Github;
