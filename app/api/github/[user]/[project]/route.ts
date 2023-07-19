@@ -5,5 +5,4 @@ export async function GET(_: Request, context: { params: { user: string, project
     const { user, project } = context.params;
     const useProfile = await githubTransport.getUserProfile(user as string, project as string);
     return NextResponse.json(useProfile)
-
 }

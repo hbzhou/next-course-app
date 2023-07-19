@@ -5,6 +5,8 @@ import { Container, Form, Label } from "semantic-ui-react";
 import Button from "../../components/common/Button";
 import Title from "../../components/common/Title";
 import { trpc } from "../../server/trpc";
+import { authorStore } from "../../store/store";
+import { useSelector } from "@legendapp/state/react";
 
 const CreateCourse = () => {
   const ctx = trpc.useContext();
@@ -19,7 +21,6 @@ const CreateCourse = () => {
   const router = useRouter();
   const mutation = trpc.course.createCourse.useMutation();
   const onSubmit: SubmitHandler<Course> = (data) => {
-    console.log(data);
     const creationDate = format(new Date(), "yyyy-MM-dd");
     mutation.mutateAsync(
       { ...data, creationDate },
@@ -33,7 +34,7 @@ const CreateCourse = () => {
   };
 
   const authorOptions =
-    trpc.author.authors.useQuery().data?.map((author: Author) => {
+    authorStore.authors.get().map((author: Author) => {
       return { text: author.name, value: author.id };
     }) || [];
 

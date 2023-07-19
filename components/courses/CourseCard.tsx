@@ -1,13 +1,13 @@
 import { useRouter } from "next/router";
 import React, { useCallback } from "react";
-import { useAuthors } from "../../service/course.hooks";
+import { useAuthorNames } from "../../service/course.hooks";
 import Button from "../common/Button";
 import LabelGroup from "../common/LabelGroup";
 import Card from "../common/Card";
 
 const CourseCard: React.FC<Course> = ({ id, title, description, duration, creationDate, authors }) => {
   const router = useRouter();
-  const authorList = useAuthors(authors);
+  const authorList = useAuthorNames(authors);
   const showCourse = useCallback(() => {
     router.push(`/courses/${id}`);
   }, [router, id]);

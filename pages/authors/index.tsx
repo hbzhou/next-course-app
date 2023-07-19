@@ -1,26 +1,13 @@
-import { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import AuthorTable from "../../components/authors/AuthorTable";
 import EditAuthorModal from "../../components/authors/EditAuthorModal";
 import Button from "../../components/common/Button";
-import Modal from "../../components/common/Modal";
 import { trpc } from "../../server/trpc";
+import { authorStore } from "../../store/store";
+import { useAuthors } from "../../service/author.hook";
 
 const Authors = () => {
-  const { register, handleSubmit } = useForm<Author>();
-
-  const ctx = trpc.useContext();
-  const { data: authors } = trpc.author.authors.useQuery();
-  const mutation = trpc.author.createAuthor.useMutation();
-
-  const onSubmit: SubmitHandler<Author> = (data) => {
-    mutation.mutateAsync(data, {
-      onSuccess: () => {
-        ctx.author.authors.invalidate();
-      },
-    });
-  };
-
+  const { data: authors } = useAuthors();
   return (
     <div className='m-4 flex justify-center'>
       <div className='m-4 w-1/2'>
