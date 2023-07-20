@@ -1,16 +1,15 @@
-import _ from "lodash";
 import { useRouter } from "next/router";
-import { useMemo, useState } from "react";
+import { useState } from "react";
 import { Container } from "semantic-ui-react";
 import Button from "../../components/common/Button";
 import CourseCard from "../../components/courses/CourseCard";
 import SearchBar from "../../components/courses/SearchBar";
-import { trpc } from "../../server/trpc";
+import { useCourses } from "../../service/course.hooks";
 
 const Courses = () => {
   const router = useRouter();
   const [keyword, setKeyword] = useState<string>("");
-  const { data: courses } = trpc.course.courses.useQuery();
+  const { data: courses } = useCourses();
 
   const handleSearch = (keyword: string) => {
     setKeyword(keyword);

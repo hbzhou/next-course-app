@@ -5,8 +5,8 @@ import { Container, Form, Label } from "semantic-ui-react";
 import Button from "../../components/common/Button";
 import Title from "../../components/common/Title";
 import { trpc } from "../../server/trpc";
-import { authorStore } from "../../store/store";
-import { useSelector } from "@legendapp/state/react";
+import { useAuthors } from "../../service/author.hook";
+import { useCreateCourse } from "../../service/course.hooks";
 
 const CreateCourse = () => {
   const ctx = trpc.useContext();
@@ -18,23 +18,14 @@ const CreateCourse = () => {
     trigger,
     formState: { errors },
   } = useForm<Course>();
-  const router = useRouter();
-  const mutation = trpc.course.createCourse.useMutation();
+  const mutation = useCreateCourse();
   const onSubmit: SubmitHandler<Course> = (data) => {
     const creationDate = format(new Date(), "yyyy-MM-dd");
-    mutation.mutateAsync(
-      { ...data, creationDate },
-      {
-        onSuccess: (_: Course) => {
-          ctx.course.courses.invalidate();
-          router.push("/courses");
-        },
-      }
-    );
+    mutation({ ...data, creationDate });
   };
 
   const authorOptions =
-    authorStore.authors.get().map((author: Author) => {
+    useAuthors().data?.map((author: Author) => {
       return { text: author.name, value: author.id };
     }) || [];
 
