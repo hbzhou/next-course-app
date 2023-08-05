@@ -1,9 +1,6 @@
-import { SubmitHandler, useForm } from "react-hook-form";
 import AuthorTable from "../../components/authors/AuthorTable";
 import EditAuthorModal from "../../components/authors/EditAuthorModal";
 import Button from "../../components/common/Button";
-import { trpc } from "../../server/trpc";
-import { authorStore } from "../../store/store";
 import { useAuthors } from "../../service/author.hook";
 
 const Authors = () => {

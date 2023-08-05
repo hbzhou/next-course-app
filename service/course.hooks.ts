@@ -13,6 +13,10 @@ export const useCourses = () => {
   return trpc.course.courses.useQuery();
 }
 
+export const useGetCourse = (id: string) => {
+  return trpc.course.getCourse.useQuery({ id }, { enabled: !!id })
+}
+
 export const useCreateCourse = () => {
   const mutation = trpc.course.createCourse.useMutation();
   const ctx = trpc.useContext();

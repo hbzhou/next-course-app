@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 import { useState } from "react";
-import { Container } from "semantic-ui-react";
+import { Container, Loader } from "semantic-ui-react";
 import Button from "../../components/common/Button";
 import CourseCard from "../../components/courses/CourseCard";
 import SearchBar from "../../components/courses/SearchBar";
@@ -9,11 +9,15 @@ import { useCourses } from "../../service/course.hooks";
 const Courses = () => {
   const router = useRouter();
   const [keyword, setKeyword] = useState<string>("");
-  const { data: courses } = useCourses();
+  const { data: courses, isLoading } = useCourses();
 
   const handleSearch = (keyword: string) => {
     setKeyword(keyword);
   };
+
+  if (isLoading) {
+    return <Loader active inline='centered' />;
+  }
 
   return (
     <Container fluid className='courses m-auto'>

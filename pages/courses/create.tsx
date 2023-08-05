@@ -13,7 +13,6 @@ const CreateCourse = () => {
   const {
     register,
     handleSubmit,
-    control,
     setValue,
     trigger,
     formState: { errors },

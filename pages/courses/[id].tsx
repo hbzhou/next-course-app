@@ -1,14 +1,13 @@
-import React from "react";
 import { useRouter } from "next/router";
-import { trpc } from "../../server/trpc";
-import LabelGroup from "../../components/common/LabelGroup";
-import { useAuthorNames } from "../../service/course.hooks";
+import React from "react";
 import { Container, Header, List, Loader } from "semantic-ui-react";
+import LabelGroup from "../../components/common/LabelGroup";
+import { useAuthorNames, useGetCourse } from "../../service/course.hooks";
 
 const CourseInfo: React.FC = () => {
   const router = useRouter();
   const id = router.query.id as string;
-  const { data: course, isLoading } = trpc.course.getCourse.useQuery({ id }, { enabled: !!id });
+  const { data: course, isLoading } = useGetCourse(id);
   const authors = useAuthorNames(course?.authors);
 
   if (isLoading || !course) {
