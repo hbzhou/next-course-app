@@ -18,6 +18,9 @@ const Navbar = () => {
             <NavLink href='/authors' iconName='user md'>
               Authors
             </NavLink>
+            <NavLink href='/users' iconName='user'>
+              Users
+            </NavLink>
           </>
         )}
       </div>
